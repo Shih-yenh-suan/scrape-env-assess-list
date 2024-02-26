@@ -107,7 +107,7 @@ def getUnitInfo(unitInfo):
 
 df_index = ['姓名', '信用编号', '从业单位名称', '近三年编制报告书数量', '近三年编制报告表数量', '当前状态', '第1记分周期',
             '第2记分周期', '第3记分周期', '第4记分周期', '第5记分周期']
-csv_path = "scrape-env-assess-list\staff.csv"
+csv_path = r"scrape-env-assess-list\agent.csv"
 
 
 def main():
