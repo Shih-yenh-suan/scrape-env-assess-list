@@ -50,6 +50,14 @@ def getListUrl(page):
     listUrl = listUrl[::4]
     listUrl = [re.search(r"'(\d+)'", u).group(1) for u in listUrl]
 
+    list环评工程师数量 = parsedHtmls.xpath(
+        '//table[@id = "contentTable"]/tbody/tr/td[5]/a/text()')
+    list环评工程师数量 = [re.sub(r'(\s)', '', u) for u in list环评工程师数量]
+
+    list主要编制人员数量 = parsedHtmls.xpath(
+        '//table[@id = "contentTable"]/tbody/tr/td[6]/a/text()')
+    list主要编制人员数量 = [re.sub(r'(\s)', '', u) for u in list主要编制人员数量]
+
     listLocAndCode = parsedHtmls.xpath(
         '//table[@id = "contentTable"]/tbody/tr/td/text()')
     listLocAndCode = [re.sub(r'(\s)', '', u) for u in listLocAndCode]
@@ -57,8 +65,8 @@ def getListUrl(page):
     listCode = listLocAndCode[3::12]
     listLoc = listLocAndCode[4::12]
     listStatus = listLocAndCode[9::12]
-    listInfo = [[a, b, c, d, e]
-                for (a, b, c, d, e) in zip(listName, listUrl, listCode, listLoc, listStatus)]
+    listInfo = [[a, b, c, d, e, f, g]
+                for (a, b, c, d, e, f, g) in zip(listName, listUrl, listCode, listLoc, list环评工程师数量, list主要编制人员数量, listStatus)]
 
     return listInfo
 
@@ -95,9 +103,9 @@ def getUnitInfo(unitInfo):
     return unitInfo
 
 
-df_index = ['Name', 'id', 'locate', 'status', 'inter1',
-            'inter2', 'inter3', 'inter4', 'inter5']
-csv_path = "D:\ZZZMydocument\Codes\实验\output.csv"
+df_index = ['单位名称', '统一社会信用代码', '住所', '环评工程师数量', '主要编制人员数量', '当前状态', '第1记分周期',
+            '第2记分周期', '第3记分周期', '第4记分周期', '第5记分周期']
+csv_path = "scrape-env-assess-list\output_new.csv"
 
 
 def main():
